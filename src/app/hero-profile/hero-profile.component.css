@@ -1,0 +1,8 @@
+.back {
+    background-color: #ff0000;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    border: 1px solid #ffffff;
+    transform: rotate(8deg);
+}
