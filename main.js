@@ -79,9 +79,6 @@ class HeroesService {
         if (page || page === 0) {
             this.page = page;
         }
-        //const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b';
-        // const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b'
-        // + (nameStartsWith ? ('&nameStartsWith=' + nameStartsWith) : '');
         const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b'
             + '&offset=' + (this.page * this.step)
             + (nameStartsWith ? ('&nameStartsWith=' + nameStartsWith) : '');
@@ -95,6 +92,19 @@ class HeroesService {
             });
         });
     }
+    /*
+      getHeroesTest (nameStartsWith?: string, page?: number) : Observable<any>{
+        if (page || page === 0) {
+          this.page = page;
+        }
+    
+        const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b'
+        + '&offset=' + (this.page * this.step)
+        + (nameStartsWith ? ('&nameStartsWith=' + nameStartsWith) : '');
+    
+        return this.http.get<any>(url);
+      }
+    */
     getHeroe(id) {
         const url = this.protocol + this.ApiUrl + 'characters/' + id + '?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b';
         return this.http.get(url);
@@ -217,7 +227,21 @@ class ListadoDeHeroesComponent {
     }
     ngOnInit() {
         this.heroesService.getHeroes();
+        //this.getHeroeTest();
     }
+    /*
+    getHeroeTest(){
+      this.heroesService
+      .getHeroesTest(this.searchString, 1)
+      .pipe(map( data=>({
+        "total": data.data.total,
+        "data" : data.data.results
+      })))
+      .subscribe(({total, data}) =>{
+        console.log(total, data);
+      })
+    }
+    */
     submitSearch() {
         this.heroesService.getHeroes(this.searchString);
     }
@@ -434,10 +458,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [], imports: [[
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClientModule"],
@@ -465,8 +490,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector
                     _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClientModule"],
                     _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormsModule"]
                 ],
-                providers: [],
-                bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+                bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]],
+                schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["CUSTOM_ELEMENTS_SCHEMA"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["NO_ERRORS_SCHEMA"]]
             }]
     }], null, null); })();
 
