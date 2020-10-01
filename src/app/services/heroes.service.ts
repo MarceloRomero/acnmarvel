@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Heroe } from '../classes/heroe';
+import { Observable } from 'rxjs';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroesService {
+
+
 
   public page = 0;
   public step = 20;
@@ -26,13 +33,11 @@ export class HeroesService {
     this.page = 0;
   }
 
+  
   getHeroes (nameStartsWith?: string, page?: number) {
     if (page || page === 0) {
       this.page = page;
     }
-    //const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b';
-   // const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b'
-   // + (nameStartsWith ? ('&nameStartsWith=' + nameStartsWith) : '');
    const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b'
    + '&offset=' + (this.page * this.step)
    + (nameStartsWith ? ('&nameStartsWith=' + nameStartsWith) : '');
@@ -56,19 +61,33 @@ export class HeroesService {
       );
     });
   }
+  
+/*
+  getHeroesTest (nameStartsWith?: string, page?: number) : Observable<any>{
+    if (page || page === 0) {
+      this.page = page;
+    }
+
+    const url = this.protocol + this.ApiUrl + 'characters?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b'
+    + '&offset=' + (this.page * this.step)
+    + (nameStartsWith ? ('&nameStartsWith=' + nameStartsWith) : '');
+
+    return this.http.get<any>(url);
+  }
+*/
   getHeroe(id) {
     const url = this.protocol + this.ApiUrl + 'characters/' + id + '?apikey=56d2cc44b1c84eb7c6c9673565a9eb4b';
     return this.http.get<any>(url);
-}
+  }
 
-getTeamColor(id):string{
-  if(this.teams.get(id)!=undefined){
-  return this.teams.get(id);
+  getTeamColor(id):string{
+    if(this.teams.get(id)!=undefined){
+    return this.teams.get(id);
+    }
+    else{
+    return "";
+    }
   }
-  else{
-  return "";
-  }
-}
 
 
 }

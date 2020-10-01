@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ListadoDeHeroesComponent } from './listado-de-heroes/listado-de-heroes.component';
 import { HeroProfileComponent } from './hero-profile/hero-profile.component';
 import { ModalPollComponent } from './modal-poll/modal-poll.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModalPollComponent } from './modal-poll/modal-poll.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]
+
 })
 export class AppModule { }
